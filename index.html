@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel= "manifest" href= "manifest.json"
+
+    <style>
+        .background-dark { 
+            background-color: #e1e7a8;
+        }
+
+        .center {
+            display: flex;
+
+            justify-content:center;
+        }
+
+
+        .margin-top {
+            margin-top:100px;
+            
+        }
+
+
+        .margin-time {
+            margin-top: 0px;
+
+
+        }
+
+
+        .timer {
+            font-size: 70px;
+            color: rgb(0, 0, 0);
+            font-family: 'Roboto', sans-serif;
+        }
+
+
+    </style>
+
+<script>
+    let alarm= new Audio ('malvadao.mp3');
+    let timerStarted = false;
+
+function change () {
+    var image = document.getElementById ('cre');
+    image.src = "img/broccolip.png"
+
+
+
+
+
+}
+
+function startTimer() {
+
+   
+
+    if (!timerStarted ){
+    let startTime = new Date (). getTime();         //zweist variable eitpunkt zum START in millisekunden zu
+    let fiveMinutes= 1000*60*5;                     //weist variable 5min in millisek. zu 
+    let endTime= startTime + fiveMinutes ;           //variable Endtime setzt sich zusammen auf startzeit und den fünf minuten
+
+    setInterval (function() {
+        let timeLeft= endTime- new Date (). getTime();
+
+        if(timeLeft > 0){
+        let minutes = timeLeft / (1000*60);
+        minutes = Math.floor(minutes);
+        let seconds= (timeLeft/1000%60)
+        seconds = Math.round (seconds);
+        seconds= ('0' + seconds).slice (-2);
+        let text= '0' + minutes + ':'+ seconds;
+        timer.innerHTML = text;
+        
+       
+
+        } else {
+            alarm.play();
+            timer.innerHTML = '00 : 00';
+            
+            
+        }
+    }, 1000);
+    timerStarted = true;
+    }
+    
+}
+
+</script>
+
+
+
+
+</head>
+    <body class="background-dark">
+        
+        <div>
+        <img src="img/menu.png" height, width="60px">
+        </div>
+
+
+
+        <div class= "center margin-top" >
+            <img src="img/cre.png" height, width="300px" alt= "img/broccolip.png" id= "cre"  onclick= "change ();"> 
+            
+        </div>
+
+
+
+
+        <div class= "center margin-time timer" id="timer"> 
+            05:00 
+        </div>
+
+
+
+
+        <div class= "center margin-top">
+            <img onclick="startTimer()" src="img/button.png" height, width="200px">
+        </div>
+
+    </body>
+
+</html>
